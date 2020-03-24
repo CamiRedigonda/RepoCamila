@@ -70,7 +70,7 @@ var simple = app.actions.create({
         {
             text: 'Tachar',
             onClick: function () {
-                toque("X");
+                tachar();
             }
 
         },
@@ -98,7 +98,7 @@ var juego = app.actions.create({
         {
             text: 'Tachar',
             onClick: function () {
-                toque("X");
+                tachar();
             }
         },
         {
@@ -160,15 +160,20 @@ $$(document).on('page:init', '.page[data-name="finjuego"]', function (e) {
 })
 function toque(dados) {
     var puntos;
-    ide = idSeleccionado;
     puntos = calcular(idSeleccionado, dados);
     if (dados == 'servida' || dados == 'noservida') {
         dados = 1;
     }
     puntos = puntos * dados;
-    $$('#' + ide).text(puntos);
-    //total();
-    $$('#' + ide).off('click');
+    $$('#' + idSeleccionado).text(puntos);
+    //actualizarTotal();
+}
+function tachar() {
+    $$('#' + idSeleccionado).text('X');
+    //actualizarTotal();
+}
+function actualizarTotal() {
+
 }
 function calcular(id, ref) {
     var a = 0;
