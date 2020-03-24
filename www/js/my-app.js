@@ -28,30 +28,85 @@ var app = new Framework7({
 var mainView = app.views.create('.view-main');
 var nj1 = "";
 var nj2 = "";
-var simplePopover = app.popover.create({
-  targetEl: 'a.dynamic-popover',
-  content: '<div class="popover">'+
-              '<div class="popover-inner">'+
-                '<div class="block">'+
-                  '<p><a href="#" class="link popover-close">1</a></p>'+
-                  '<p><a href="#" class="link popover-close">2</a></p>'+
-                  '<p><a href="#" class="link popover-close">3</a></p>'+
-                  '<p><a href="#" class="link popover-close">4</a></p>'+
-                  '<p><a href="#" class="link popover-close">5</a></p>'+
-                  '<p><a href="#" class="link popover-close">Tachar</a></p>'+
-                '</div>'+
-              '</div>'+
-            '</div>',
-  // Events
-  on: {
-    open: function (popover) {
-      console.log('Popover open');
+var idSeleccionado;
+var simple = app.actions.create({
+  buttons: [
+    {
+      text: 'Elige la cantidad de dados',
+      label: true,
+      bold: true,
     },
-    opened: function (popover) {
-      console.log('Popover opened');
+    {
+      text: '1',
+      onClick: function () {
+        toque(1);
+
+      }
     },
-  }
-});
+    {
+      text: '2',
+      onClick: function () {
+        toque(2);
+      }
+    },
+    {
+      text: '3',
+      onClick: function () {
+        toque(3);
+      }
+    },
+    {
+      text: '4',
+      onClick: function () {
+        toque(4);
+      }
+    },
+    {
+      text: '5',
+      onClick: function () {
+        toque(5);
+      }
+    },
+    {
+      text: 'Tachar',
+      onClick: function () {
+        toque("X");
+      }
+
+    },
+    {
+      text: 'Cancelar',
+      color: 'red'
+    },
+  ]
+
+})
+var juego = app.actions.create({
+  buttons: [
+    {
+      text: 'Servida',
+      onClick: function () {
+        toque(servida);
+      }
+    },
+    {
+      text: 'Armada',
+      onClick: function () {
+        toque(noservida);
+      }
+    },
+    {
+      text: 'Tachar',
+      onClick: function () {
+        toque("X");
+      }
+    },
+    {
+      text: 'Cancelar',
+      color: 'red'
+    },,
+  ]
+})
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     // se llega aca, cuando termina de cargar el INDEX.html
@@ -87,34 +142,147 @@ $$(document).on('page:init', function (e) {
 $$(document).on('page:init', '.page[data-name="anotador"]', function (e) {
     // se ejecuta cuando se carga ANOTADOR
     console.log(e);
-    function clickSimple(valorDados){
-      simplePopover.open()
-
-    };
-
-    
-
     $$('#nj1').text(nj1);
     $$('#nj2').text(nj2);
-    $$('#j1_1').on('click', function () {clickSimple(1);});
-    $$('#j1_2').on('click', function () {clickSimple(2);});
-    $$('#j1_3').on('click', function () {clickSimple(3);});
-    $$('#j1_4').on('click', function () {clickSimple(4);});
-    $$('#j1_5').on('click', function () {clickSimple(5);});
-    $$('#j1_6').on('click', function () {clickSimple(6);});
-    $$('#j2_1').on('click', function () {clickSimple(1);});
-    $$('#j2_2').on('click', function () {clickSimple(2);});
-    $$('#j2_3').on('click', function () {clickSimple(3);});
-    $$('#j2_4').on('click', function () {clickSimple(4);});
-    $$('#j2_5').on('click', function () {clickSimple(5);});
-    $$('#j2_6').on('click', function () {clickSimple(6);});
-
+    $$('.as1').on('click', function () {
+      idSeleccionado= this.id;
+      simple.open();
+    });
+    $$('.as2').on('click', function () {
+      idSeleccionado= this.id;
+      juego.open();
+    });
 })
-
 $$(document).on('page:init', '.page[data-name="finjuego"]', function (e) {
     // se ejecuta cuando se carga FIN JUEGO
     console.log(e);
     
-
-
 })
+ function toque(dados){
+      var puntos;
+      ide = idSeleccionado;
+      puntos = calcular(idSeleccionado, dados);
+      if (dados == 'servida' || (dados == 'noservida')) {
+        dados = 1;
+      }
+      puntos = puntos * dados;
+      $$('#' + ide).text(puntos);
+      //total();
+      $$('#' + ide).off('click');
+    }
+function calcular(id, ref) {
+    var a = 0;
+    switch (id) {
+        case 'j1_1':
+          a = 1;
+          break
+        case 'j1_2':
+          a = 2;
+          break
+        case 'j1_3':
+          a = 3;
+          break
+        case 'j1_4':
+          a = 4;
+          break
+        case 'j1_5':
+          a = 5;
+          break
+        case 'j1_6':
+          a = 6;
+          break
+          //servido / no servido
+        case 'j1_7':
+          if (ref == 'servida') {
+            a = 25;
+          } else {
+            a = 20;
+          }
+          break
+        case 'j1_8':
+          if (ref == 'servida') {
+            a = 30;
+          } else {
+            a = 25;
+          }
+          break
+        case 'j1_9':
+          if (ref == 'servida') {
+            a = 45;
+          } else {
+            a = 40;
+          }
+          break
+        case 'j1_10':
+          if (ref == 'servida') {
+            a = 55;
+          } else {
+            a = 50;
+          }
+          break
+        case 'j1_11':
+          if (ref == 'servida') {
+            a = 65;
+          } else {
+            a = 60;
+          }
+          break
+
+          //jugador 2  
+        case 'j2_1':
+          a = 1;
+          break
+        case 'j2_2':
+          a = 2;
+          break
+        case 'j2_3':
+          a = 3;
+          break
+        case 'j2_4':
+          a = 4;
+          break
+        case 'j2_5':
+          a = 5;
+          break
+        case 'j2_6':
+          a = 6;
+          break
+          //servido / no servido
+        case 'j2_7':
+          if (ref == 'servida') {
+            a = 25;
+          } else {
+            a = 20;
+          }
+          break
+        case 'j2_8':
+          if (ref == 'servida') {
+            a = 30;
+          } else {
+            a = 25;
+          }
+          break
+        case 'j2_9':
+          if (ref == 'servida') {
+            a = 45;
+          } else {
+            a = 40;
+          }
+          break
+        case 'j2_10':
+          if (ref == 'servida') {
+            a = 55;
+          } else {
+            a = 50;
+          }
+          break
+        case 'j2_11':
+          if (ref == 'servida') {
+            a = 65;
+          } else {
+            a = 60;
+          }
+          break
+      }
+      return (a)
+    }
