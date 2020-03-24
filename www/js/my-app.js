@@ -40,7 +40,6 @@ var simple = app.actions.create({
             text: '1',
             onClick: function () {
                 toque(1);
-
             }
         },
         {
@@ -178,6 +177,7 @@ function actualizarTotal() {
         for (jugada = 1; jugada <= 11; ++jugada) {
             var campo = parseInt($$('#j' + jugador + '_' + jugada).text());
             if (typeof campo == 'number' && !isNaN(campo)) {
+
                 score += campo;
             }
         }
@@ -185,118 +185,12 @@ function actualizarTotal() {
     }
 }
 function calcular(id, ref) {
-    var a = 0;
-    switch (id) {
-        case 'j1_1':
-            a = 1;
-            break
-        case 'j1_2':
-            a = 2;
-            break
-        case 'j1_3':
-            a = 3;
-            break
-        case 'j1_4':
-            a = 4;
-            break
-        case 'j1_5':
-            a = 5;
-            break
-        case 'j1_6':
-            a = 6;
-            break
-        //servido / no servido
-        case 'j1_7':
-            if (ref == 'servida') {
-                a = 25;
-            } else {
-                a = 20;
-            }
-            break
-        case 'j1_8':
-            if (ref == 'servida') {
-                a = 30;
-            } else {
-                a = 25;
-            }
-            break
-        case 'j1_9':
-            if (ref == 'servida') {
-                a = 45;
-            } else {
-                a = 40;
-            }
-            break
-        case 'j1_10':
-            if (ref == 'servida') {
-                a = 55;
-            } else {
-                a = 50;
-            }
-            break
-        case 'j1_11':
-            if (ref == 'servida') {
-                a = 65;
-            } else {
-                a = 60;
-            }
-            break
-
-        //jugador 2  
-        case 'j2_1':
-            a = 1;
-            break
-        case 'j2_2':
-            a = 2;
-            break
-        case 'j2_3':
-            a = 3;
-            break
-        case 'j2_4':
-            a = 4;
-            break
-        case 'j2_5':
-            a = 5;
-            break
-        case 'j2_6':
-            a = 6;
-            break
-        //servido / no servido
-        case 'j2_7':
-            if (ref == 'servida') {
-                a = 25;
-            } else {
-                a = 20;
-            }
-            break
-        case 'j2_8':
-            if (ref == 'servida') {
-                a = 30;
-            } else {
-                a = 25;
-            }
-            break
-        case 'j2_9':
-            if (ref == 'servida') {
-                a = 45;
-            } else {
-                a = 40;
-            }
-            break
-        case 'j2_10':
-            if (ref == 'servida') {
-                a = 55;
-            } else {
-                a = 50;
-            }
-            break
-        case 'j2_11':
-            if (ref == 'servida') {
-                a = 65;
-            } else {
-                a = 60;
-            }
-            break
+    var puntajeArmada = [1, 2, 3, 4, 5, 6, 20, 25, 40, 50, 60];
+    var puntajeServida = [1, 2, 3, 4, 5, 6, 25, 30, 45, 55, 65];
+    var indice = parseInt(id.split('_')[1]) - 1
+    if(ref === "servida"){
+        return puntajeServida[indice];
+    }else{
+        return puntajeArmada[indice];
     }
-    return (a)
 }
