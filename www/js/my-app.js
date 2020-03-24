@@ -177,9 +177,7 @@ function actualizarTotal() {
         var score = 0;
         for (jugada = 1; jugada <= 11; ++jugada) {
             var campo = parseInt($$('#j' + jugador + '_' + jugada).text());
-            console.log(campo);
             if (typeof campo == 'number' && !isNaN(campo)) {
-                console.log('SUMANDO: ', campo);
                 score += campo;
             }
         }
