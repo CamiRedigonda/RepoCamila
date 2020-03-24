@@ -166,14 +166,25 @@ function toque(dados) {
     }
     puntos = puntos * dados;
     $$('#' + idSeleccionado).text(puntos);
-    //actualizarTotal();
+    actualizarTotal();
 }
 function tachar() {
     $$('#' + idSeleccionado).text('X');
-    //actualizarTotal();
+    actualizarTotal();
 }
 function actualizarTotal() {
-
+    for (jugador = 1; jugador <= 2; ++jugador) {
+        var score = 0;
+        for (jugada = 1; jugada <= 11; ++jugada) {
+            var campo = parseInt($$('#j' + jugador + '_' + jugada).text());
+            console.log(campo);
+            if (typeof campo == 'number' && !isNaN(campo)) {
+                console.log('SUMANDO: ', campo);
+                score += campo;
+            }
+        }
+        $$('#j'+jugador+'_12').text(score);
+    }
 }
 function calcular(id, ref) {
     var a = 0;
