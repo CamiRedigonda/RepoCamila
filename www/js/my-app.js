@@ -151,12 +151,21 @@ $$(document).on('page:init', '.page[data-name="anotador"]', function (e) {
         idSeleccionado = this.id;
         juego.open();
     });
+    $$('#limpiar').on('click', limpiar);
 })
 $$(document).on('page:init', '.page[data-name="finjuego"]', function (e) {
     // se ejecuta cuando se carga FIN JUEGO
     console.log(e);
 
 })
+function limpiar(){
+    for (jugador = 1; jugador <= 2; ++jugador) {
+        for (jugada = 1; jugada <= 12; ++jugada) {
+            $$('#j'+jugador+"_"+jugada).text('-');
+        }
+    }
+};
+
 function toque(dados) {
     var puntos;
     puntos = calcular(idSeleccionado, dados);
