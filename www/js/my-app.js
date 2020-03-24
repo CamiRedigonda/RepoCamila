@@ -86,13 +86,13 @@ var juego = app.actions.create({
     {
       text: 'Servida',
       onClick: function () {
-        toque(servida);
+        toque("servida");
       }
     },
     {
       text: 'Armada',
       onClick: function () {
-        toque(noservida);
+        toque("noservida");
       }
     },
     {
@@ -162,7 +162,7 @@ $$(document).on('page:init', '.page[data-name="finjuego"]', function (e) {
       var puntos;
       ide = idSeleccionado;
       puntos = calcular(idSeleccionado, dados);
-      if (dados == 'servida' || (dados == 'noservida')) {
+      if (dados == 'servida' || dados == 'noservida') {
         dados = 1;
       }
       puntos = puntos * dados;
