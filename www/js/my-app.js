@@ -106,6 +106,40 @@ var juego = app.actions.create({
         }, ,
     ]
 })
+function crearPopupFinal() {
+    var total1= parseInt($$('#j1_12').text())
+    var total2= parseInt($$('#j2_12').text())
+    var j1= $$('#nj1').text()
+    var j2= $$('#nj2').text()
+    if(total1 > total2){
+        var ganador= j1;
+        }else{
+            var ganador= j2;
+        }
+    if(total1 === total2){
+        var textoFinal= "<p>¡Han empatado!</p>" ;
+        }else{
+        var textoFinal= '<p>¡Ha ganado '+ganador+'!</p>';
+        }
+    var popup = app.popup.create({
+        content: '<div class="popup">'+
+                    '<div class="block">'+
+                        textoFinal+
+                        '<p><a href="/index/" class="link popup-close">Volver</a></p>'+
+                    '</div>'+
+                '</div>',
+        // Events
+        on: {
+            open: function (popup) {
+            console.log('Popup open');
+            },
+            opened: function (popup) {
+            console.log('Popup opened');
+            },
+        }
+    });
+    return popup;
+}
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function () {
     // se llega aca, cuando termina de cargar el INDEX.html
@@ -152,6 +186,7 @@ $$(document).on('page:init', '.page[data-name="anotador"]', function (e) {
         juego.open();
     });
     $$('#limpiar').on('click', limpiar);
+    $$('#fin').on('click', fin);
 })
 $$(document).on('page:init', '.page[data-name="finjuego"]', function (e) {
     // se ejecuta cuando se carga FIN JUEGO
@@ -164,7 +199,19 @@ function limpiar(){
             $$('#j'+jugador+"_"+jugada).text('-');
         }
     }
-};
+}
+function fin(){
+    var popup = crearPopupFinal();
+    popup.open();
+    limpiarTodo();
+}
+function limpiarTodo(){
+    limpiar();
+    $$('#nj1').text('');
+    $$('#nj2').text('');
+    $$('#j1').text('');
+    $$('#j2').text('');
+}
 
 function toque(dados) {
     var puntos;
