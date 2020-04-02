@@ -1,24 +1,57 @@
 * {
     font-family: Tahoma, sans-serif;
-    background-color: rgb(87, 139, 132);
-    color: #3A393B;
+    background-color: #008B8B;
+    color: #FAEBD7;
 }
 #inicio {
-    color:#3A393B ;
+    color:#FAEBD7 ;
     font-size: 6vw;
-    border:#3A393B solid ;
+    border:#FAEBD7 solid ;
 }
 .item-title, .item-label, .item-input-focused {
-    color:#3A393B !important;
-    font-size: 6vw !important;
+    color:#FAEBD7 !important;
+    font-size: 4vw !important;
 }
 td {
     height: 15% !important;
 }
 .title {
     font-size: 3vw;
-    color:#3A393B;
+    color:#FAEBD7;
+    margin-left: 1vw !important;
 }
 a {
-    color:#3A393B;
+    color:#FAEBD7;
+}
+#limpiar, #fin {
+    margin-top: 1vw !important;
+    color: #FAEBD7 ;
+    font-size: 4vw;
+    border:#FAEBD7  solid ;
+}
+td {
+    font-size: 5vw !important;
+    width: 32vw !important;
+    height: 6vh !important;
+    border-top: #5F9EA0 solid !important;
+    border-right: #5F9EA0 solid !important;
+}
+.link{
+    color:#FAEBD7 !important;
+    font-size: 7vw !important;
+}
+.popup-open{
+    font-size: 5vw !important;
+    padding: 1vw;
+}
+.popup{
+    background-color: #008B8B;
+    font-size: 5vw !important;
+    padding: 2vw;
+}
+.actions-button, .actions-button-bold{
+    background-color: #008B8B;
+}
+.block{
+    font-size: 18vw !important;
 }

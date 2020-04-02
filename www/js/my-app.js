@@ -145,22 +145,6 @@ $$(document).on('deviceready', function () {
     // se llega aca, cuando termina de cargar el INDEX.html
     console.log("Device is ready!");
 
-    $$('#inicio').on('click', function () {
-
-        nj1 = $$('#j1').val();  //NO PONER var, asi se usa la variable global definida.
-        nj2 = $$('#j2').val();
-
-        if (nj1 === "") {
-            nj1 = "Jugador 1"
-        }
-
-        if (nj2 === "") {
-            nj2 = "Jugador 2"
-        }
-
-        console.log("Jugadores seteados: " + nj1 + " / " + nj2);
-    })
-
 });
 
 // Option 1. Using one 'page:init' handler for all pages
@@ -174,6 +158,15 @@ $$(document).on('page:init', function (e) {
 // Option 2. Using live 'page:init' event handlers for each page
 $$(document).on('page:init', '.page[data-name="anotador"]', function (e) {
     // se ejecuta cuando se carga ANOTADOR
+    nj1 = $$('#j1').val();  //NO PONER var, asi se usa la variable global definida.
+    nj2 = $$('#j2').val();
+    if (nj1 === "") {
+        nj1 = "Jugador 1"
+    }
+    if (nj2 === "") {
+        nj2 = "Jugador 2"
+    }
+
     console.log(e);
     $$('#nj1').text(nj1);
     $$('#nj2').text(nj2);
@@ -187,11 +180,11 @@ $$(document).on('page:init', '.page[data-name="anotador"]', function (e) {
     });
     $$('#limpiar').on('click', limpiar);
     $$('#fin').on('click', fin);
+
 })
 $$(document).on('page:init', '.page[data-name="finjuego"]', function (e) {
     // se ejecuta cuando se carga FIN JUEGO
     console.log(e);
-
 })
 function limpiar(){
     for (jugador = 1; jugador <= 2; ++jugador) {
@@ -199,6 +192,8 @@ function limpiar(){
             $$('#j'+jugador+"_"+jugada).text('-');
         }
     }
+
+    actualizarTotal();
 }
 function fin(){
     var popup = crearPopupFinal();
