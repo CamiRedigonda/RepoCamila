@@ -1,0 +1,24 @@
+* {
+    font-family: Tahoma, sans-serif;
+    background-color: rgb(87, 139, 132);
+    color: #3A393B;
+}
+#inicio {
+    color:#3A393B ;
+    font-size: 6vw;
+    border:#3A393B solid ;
+}
+.item-title, .item-label, .item-input-focused {
+    color:#3A393B !important;
+    font-size: 6vw !important;
+}
+td {
+    height: 15% !important;
+}
+.title {
+    font-size: 3vw;
+    color:#3A393B;
+}
+a {
+    color:#3A393B;
+}
